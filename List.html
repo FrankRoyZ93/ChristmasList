@@ -9,11 +9,44 @@
 	<body>
 		<h1>Christmas List</h1>
 		</br>
+		
+		<!-- Javascript -->
+		<script>
+		function Add(toAdd, list) {
+			//	number of elements in the list	
+			var nbInList = list.getElementsByTagName("li").length;
+			
+			// debug
+			document.getElementById("demo").innerHTML = toAdd + (nbInList + 1);
+			
+			// reset the "Add" text 
+			document.getElementById("addText").value = "";			
+			
+			// add element in the list
+			list.innerHTML += '<li><input type="checkbox" name="check' + (nbInList + 1) +'" value="' + (nbInList + 1) +'">' + toAdd + '</li>';
+		}
+		</script>
+		
+		<!-- List -->
+		<ul id="list" style="list-style-type:none">
+			<li><input type="checkbox" name="check1" value="1">Toy</li>
+			<li><input type="checkbox" name="check2" value="2">Game</li>
+			<li><input type="checkbox" name="check3" value="3">Plushie</li>
+		</ul>
+		</br>
+		
+		<!-- Add area -->
 		<p>
-			<input type="checkbox" name="check1" value="1">Toy<br>
-			<input type="checkbox" name="check2" value="2">Game<br>
-			<input type="checkbox" name="check3" value="3">Plushie<br>
+		<input type="text" id="addText" maxlength="25" cols="25"></textarea>
+		<button onclick="Add(addText.value, list)">Add</button>
 		</p>
-		</br>		
+		</br>
+		
+		<!-- Debug -->
+		<!-- - will display the elements added in the list and its place -->
+		<p id="demo"></p>
+		
+		<!-- This will be displayed if the executing browser does not support Javascript -->
+		<noscript>... no JS... ...wut?</noscript>
 	</body>
 </html>
