@@ -3,3 +3,8 @@ h1
 	text-align : center;
 	color : red;
 }
+
+draggable.panel-heading
+{
+	cursor : move;
+}
