@@ -24,26 +24,9 @@
 		<h1>Christmas List</h1>
 		<br />
 		
-		<!-- Javascript -->
-		<script>
-		function Add(toAdd, list) {
-			//	number of elements in the list	
-			var nbInList = list.getElementsByTagName("li").length;
-			
-			// debug
-			document.getElementById("demo").innerHTML = toAdd + (nbInList + 1);
-			
-			// reset the "Add" text 
-			document.getElementById("addText").value = "";			
-			
-			// add element in the list
-			list.innerHTML += '<li class="list-group-item"><input type="checkbox" name="check' + (nbInList + 1) +'" value="' + (nbInList + 1) +'">' + toAdd + '</li>';
-		}
-		</script>
-		
 		<!-- List -->
 		<div class="container-fluid">
-			<ul class="list-group" id="list" style="list-style-type:none">
+			<ul class="list-group" id="list">
 				<li class="list-group-item"><input type="checkbox" name="check1" value="1">Toy</li>
 				<li class="list-group-item"><input type="checkbox" name="check2" value="2">Game</li>
 				<li class="list-group-item"><input type="checkbox" name="check3" value="3">Plushie</li>
@@ -73,5 +56,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
+		
+		<!-- Javascript -->
+		<script src="List-functions.js"></script>
 	</body>
 </html>
