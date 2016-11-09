@@ -27,39 +27,36 @@
 		<!-- List -->
 		<div class="container-fluid">
 			<ul class="list-group" id="list">
-				<li class="list-group-item" id="element1">
+				<li class="list-group-item" id="element1" ondrop="Drop(event, element1)" ondragover="AllowDrop(event)">
 					<div class="input-group">
-						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" draggable="true" ondragstart="Drag(event)"></span>
+						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" draggable="true" ondragstart="Drag(element1)"></span>
 						<span class="input-group-adon">
-							<input type="checkbox" value="1">
+							<input type="checkbox" name="1" value="Toy">Toy
 						</span>
-						Toy
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" onclick="Erase(element1, list)">Erase</button>
+							<button class="btn btn-default" type="button" onclick="Erase(element1)">Erase</button>
 						</span>
 					</div>
 				</li>
-				<li class="list-group-item" id="element2">
+				<li class="list-group-item" id="element2" ondrop="Drop(event, element2)" ondragover="AllowDrop(event)">
 					<div class="input-group">
-						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" draggable="true" ondragstart="Drag(event)"></span>
+						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" draggable="true" ondragstart="Drag(element2)"></span>
 						<span class="input-group-adon">
-							<input type="checkbox" value="2">
+							<input type="checkbox" name="2" value="Game">Game
 						</span>
-						Game
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" onclick="Erase(element2, list)">Erase</button>
+							<button class="btn btn-default" type="button" onclick="Erase(element2)">Erase</button>
 						</span>
 					</div>					
 				</li>
-				<li class="list-group-item"id="element3">
+				<li class="list-group-item"id="element3" ondrop="Drop(event, element3)" ondragover="AllowDrop(event)">
 					<div class="input-group">
-						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" draggable="true" ondragstart="Drag(event)"></span>
+						<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" draggable="true" ondragstart="Drag(element3)"></span>
 						<span class="input-group-adon">
-							<input type="checkbox" value="3">
+							<input type="checkbox" name="3" value="Plushie">Plushie
 						</span>
-						Plushie
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" onclick="Erase(element3, list)">Erase</button>
+							<button class="btn btn-default" type="button" onclick="Erase(element3)">Erase</button>
 						</span>
 					</div>
 				</li>
@@ -72,7 +69,7 @@
 			<div class="input-group">
 				<input type="text" id="addText" class="form-control" maxlength="25" placeholder="Enter text here..."></input>
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button" onclick="Add(addText.value, list)">Add</button>
+					<button class="btn btn-default" type="button" onclick="Add(addText.value)">Add</button>
 				</span>
 			</div>
 		</div>
@@ -80,7 +77,9 @@
 				
 		<!-- Debug -->
 		<!-- - will display the elements added in the list and its place -->
+		<p id="debug"></p>
 		<p id="demo"></p>
+		<p id="reorganize"></p>
 		
 		<!-- This will be displayed if the executing browser does not support Javascript -->
 		<noscript>... no JS... ...wut?</noscript>
@@ -88,7 +87,7 @@
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="js/bootstrap.min.js"></script>
+		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 		
 		<!-- Javascript -->
 		<script src="List-functions.js"></script>
