@@ -27,8 +27,7 @@ function Add(_toAdd)
 	FindList();
 	if (_toAdd == "")
 	{
-		// debug
-		document.getElementById("demo").innerHTML = "Oops! Write something first!";				
+		window.alert("Oops! Write something first!");				
 	}
 	else if(list == null || list == undefined)
 	{
@@ -39,12 +38,12 @@ function Add(_toAdd)
 		document.getElementById("demo").innerHTML = "";
 		
 		// reset the "Add" text 
-		//document.getElementById("addText").value = "";			
+		document.getElementById("addText").value = "";			
 		
 		// add element in the list
 		list.innerHTML += 
-		'<li class="list-group-item" id="element' + (nbOfElements + 1) + '" ondrop="Drop(event, element' + (nbOfElements + 1) + ')" ondragover="AllowDrop(event)">' +
-		'	<div class="input-group">' +
+		'<li class="list-group-item" id="element' + (nbOfElements + 1) + '" >' +
+		'	<div class="input-group" ondrop="Drop(event, element' + (nbOfElements + 1) + ')" ondragover="AllowDrop(event)">' +
 		'		<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" draggable="true" ondragstart="Drag(element' + (nbOfElements + 1) + ')"></span>' +
 		'		<span class="input-group-adon" id="checkbox">' +
 		'			<input type="checkbox" name="' + (nbOfElements + 1) +'" value="' + _toAdd + '">' + _toAdd +
@@ -57,9 +56,6 @@ function Add(_toAdd)
 		
 		//	get the number of elements in the list	
 		nbOfElements = list.getElementsByTagName("li").length;
-		
-		// debug
-		//document.getElementById("demo").innerHTML = _toAdd + nbOfElements;
 	}
 }
 
@@ -76,31 +72,18 @@ function Erase(_toErase)
 	}
 	else
 	{		
-		// We will now check in the list where '_toErase' is located
-		// The following boolean will tell us when it has been located
-		var toEraseFound = false;
+		var elements = list.getElementsByTagName("li");
 		
+		// We will now check in the list where '_toErase' is located		
 		for (i = 0; i < nbOfElements; i++)
 		{
 			if(elements[i] == _toErase)
 			{
 				elements[i].parentNode.removeChild(elements[i]);
-				toEraseFound = true;
+				ReorganiseList();
 				break;
 			}
 		}
-		
-		// now we need to give the rest of the list their new value
-		if(toEraseFound)
-		{
-			ReorganiseList();
-		}
-		
-		//	get the number of elements in the list
-		nbOfElements = elements.length;
-		
-		// debug
-		//document.getElementById("demo").innerHTML = _toErase.id;
 	}
 }
 
@@ -109,20 +92,12 @@ function ReorganiseList()
 	FindList();
 	var elements = list.getElementsByTagName("li");
 	
-	// debug
-	//document.getElementById("reorganize").innerHTML = "";
-	
 	for (i = 0; i < nbOfElements; i++)
 	{
-		// debug
-		//document.getElementById("reorganize").innerHTML += i + '</br>';		
-		//document.getElementById("reorganize").innerHTML += elements[i].getElementsByTagName("input")[0].name + ' = ';
-		//document.getElementById("reorganize").innerHTML += elements[i].getElementsByTagName("input")[0].value + ' - ';
-		//document.getElementById("reorganize").innerHTML += elements[i].getElementsByTagName("span")[0].ondragstart + ' - ';
-		//document.getElementById("reorganize").innerHTML += elements[i].getElementsByTagName("button")[0].onclick + ' --> ';
 		
+		elements[i].id = "element" + (i + 1);
 		elements[i].innerHTML =		
-		'	<div class="input-group">' +
+		'	<div class="input-group" ondrop="Drop(event, element' + (i + 1) + ')" ondragover="AllowDrop(event)">' +
 		'		<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" draggable="true" ondragstart="Drag(element' + (i + 1) + ')"></span>' +
 		'		<span class="input-group-adon" id="checkbox">' +
 		'			<input type="checkbox" name="' + (i + 1) +'" value="' + elements[i].getElementsByTagName("input")[0].value + '">' + elements[i].getElementsByTagName("input")[0].value +
@@ -131,12 +106,6 @@ function ReorganiseList()
 		'			<button class="btn btn-default" type="button" onclick="Erase(element' + (i + 1) + ')">Erase</button>' +
 		'		</span>' +
 		'	</div>';
-		
-		// debug
-		//document.getElementById("reorganize").innerHTML += elements[i].getElementsByTagName("input")[0].name + ' = ';
-		//document.getElementById("reorganize").innerHTML += elements[i].getElementsByTagName("input")[0].value + ' - ';
-		//document.getElementById("reorganize").innerHTML += elements[i].getElementsByTagName("span")[0].ondragstart + ' - ';
-		//document.getElementById("reorganize").innerHTML += elements[i].getElementsByTagName("button")[0].onclick + '</br>';
 	}
 }
 
@@ -149,9 +118,6 @@ function Drag(_element)
 {
 	dragOrigin = _element;
 	toTransfer = _element.innerHTML;
-	
-	// debug
-	//document.getElementById("demo").innerHTML = _element.id + "    " + _element.getElementsByTagName("input")[0].value;
 }
 
 function Drop(_ev, _element) 
@@ -159,10 +125,6 @@ function Drop(_ev, _element)
     _ev.preventDefault();
 	
 	var destChildren = _element.innerHTML;
-	
-	// debug
-	//document.getElementById("demo").innerHTML = _element.id + " = " + _element.getElementsByTagName("input")[0].value + " <--> ";
-	//document.getElementById("demo").innerHTML += dragOrigin.id + " = " + dragOrigin.getElementsByTagName("input")[0].value;
 	
 	_element.innerHTML = toTransfer;
 	dragOrigin.innerHTML = destChildren;
